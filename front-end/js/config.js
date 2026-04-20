@@ -2,7 +2,7 @@
   const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
   const DEFAULTS = {
-    API_ORIGIN: isLocalHost ? 'http://localhost:3000' : window.location.origin,
+    API_ORIGIN: isLocalHost ? 'http://localhost:3000' : 'https://sol-modapraia.onrender.com',
     SITE_URL: isLocalHost ? 'http://127.0.0.1:5500/front-end' : window.location.origin,
     GOOGLE_CLIENT_ID: 'SEU_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
     WHATSAPP_PHONE: '5511999999999',
