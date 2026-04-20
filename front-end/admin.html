@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Sol Moda Praia</title>
+  <link rel="shortcut icon" href="imagens/perfil.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --areia: #F7F3EE;
+      --areia-escura: #EDE8E2;
+      --gold: #C9A96E;
+      --teal: #5BBCB0;
+      --dark: #2a2a2a;
+      --muted: #9a9490;
+      --danger: #c0392b;
+      --success: #27ae60;
+      --warning: #e67e22;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: var(--areia);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ── TELA DE LOGIN ── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d0d0d;
+    }
+
+    .login-box {
+      background: var(--areia);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .login-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: .3em;
+      color: var(--teal);
+      margin-bottom: .3rem;
+    }
+
+    .login-sub {
+      font-size: .75rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .login-divider {
+      width: 32px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: .5;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: .9rem 1rem;
+      border: 1px solid rgba(42,42,42,.2);
+      background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .login-input:focus { border-color: var(--gold); }
+
+    .login-btn {
+      width: 100%;
+      padding: .9rem;
+      background: var(--dark);
+      color: var(--areia);
+      border: none;
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .3s;
+    }
+
+    .login-btn:hover { background: var(--teal); }
+
+    .login-erro {
+      margin-top: .8rem;
+      font-size: .8rem;
+      color: var(--danger);
+      min-height: 1.2em;
+    }
+
+    /* ── PAINEL PRINCIPAL ── */
+    #painel { display: none; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: #0d0d0d;
+      padding: 2rem 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      letter-spacing: .3em;
+      color: var(--teal);
+      text-align: center;
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid rgba(201,169,110,.15);
+    }
+
+    .sidebar-logo span {
+      display: block;
+      font-size: .5rem;
+      letter-spacing: .25em;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    .sidebar-nav {
+      padding: 1.5rem 0;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .85rem 1.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(245,240,235,.45);
+      cursor: pointer;
+      transition: color .2s, background .2s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover { color: var(--gold); background: rgba(201,169,110,.06); }
+    .nav-item.ativo { color: var(--gold); border-left: 2px solid var(--gold); }
+    .nav-item svg { opacity: .6; flex-shrink: 0; }
+    .nav-item.ativo svg { opacity: 1; }
+
+    .sidebar-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(201,169,110,.15);
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: .6rem;
+      background: transparent;
+      border: 1px solid rgba(201,169,110,.3);
+      color: var(--muted);
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .logout-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+    .main {
+      padding: 2.5rem 3rem;
+      overflow-y: auto;
+    }
+
+    .page-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(201,169,110,.2);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+  .page-header-left {
+      display: flex;
+      flex-direction: column;
+}
+
+    .page-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 2rem;
+      color: var(--dark);
+      letter-spacing: .04em;
+    }
+
+    .page-subtitulo {
+      font-family: 'Cinzel', serif;
+      font-size: .58rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: .5rem;
+    }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-bottom: 2px solid var(--areia-escura);
+    }
+
+    .stat-label {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .6rem;
+    }
+
+    .stat-valor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .stat-card.gold .stat-valor { color: var(--gold); }
+    .stat-card.teal .stat-valor { color: var(--teal); }
+
+    /* ── TABELAS ── */
+    .section-titulo {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+    }
+
+    .tabela-wrap {
+      background: #fff;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { border-bottom: 1px solid var(--areia-escura); }
+
+    th {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    td {
+      padding: 1rem 1.2rem;
+      font-size: .95rem;
+      border-bottom: 1px solid var(--areia);
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--areia); }
+
+    .status {
+      font-family: 'Cinzel', serif;
+      font-size: .52rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .status.pendente   { background: #fef3e2; color: var(--warning); }
+    .status.confirmado { background: #eafaf1; color: var(--success); }
+    .status.enviado    { background: #e8f4fd; color: #2980b9; }
+    .status.entregue   { background: #eafaf1; color: var(--success); }
+    .status.cancelado  { background: #fdecea; color: var(--danger); }
+
+    .status-select {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      padding: .35rem .6rem;
+      border: 1px solid rgba(42,42,42,.2);
+      background: transparent;
+      color: var(--dark);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .cliente-info { display: flex; align-items: center; gap: .75rem; }
+
+    .cliente-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--areia-escura);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: .7rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .cliente-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .cliente-nome { font-size: .95rem; }
+    .cliente-email { font-size: .75rem; color: var(--muted); }
+    .itens-lista { font-size: .82rem; color: var(--muted); }
+
+    .tab-content { display: none; }
+    .tab-content.ativo { display: block; }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: .2em;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── BOTÃO PRIMÁRIO ── */
+    .btn-primary {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      background: var(--dark);
+      color: var(--areia);
+      border: none;
+      padding: .75rem 1.6rem;
+      cursor: pointer;
+      transition: background .25s;
+    }
+
+    .btn-primary:hover { background: var(--teal); }
+
+    .btn-danger {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      padding: .4rem .9rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+
+    .btn-edit {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      padding: .4rem .9rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      margin-right: .4rem;
+    }
+
+    .btn-edit:hover { background: var(--teal); color: #fff; }
+
+    /* ── MODAL DE PRODUTO ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(13,13,13,.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .modal-overlay.aberto {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--areia);
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+    }
+
+    .modal-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(201,169,110,.2);
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: .56rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: .8rem 1rem;
+      border: 1px solid rgba(42,42,42,.18);
+      background: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus { border-color: var(--gold); }
+
+    .form-textarea { resize: vertical; min-height: 90px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201,169,110,.2);
+    }
+
+    .btn-cancelar {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(42,42,42,.2);
+      padding: .75rem 1.6rem;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+
+    .btn-cancelar:hover { border-color: var(--dark); color: var(--dark); }
+
+    /* ── GRID DE PRODUTOS ── */
+    .produtos-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      margin-bottom: 3rem;
+    }
+
+    .produto-admin-card {
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .produto-admin-thumb {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: var(--areia-escura);
+    }
+
+    .produto-admin-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--areia-escura);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .produto-admin-thumb-placeholder svg { opacity: .3; }
+
+    .produto-admin-info {
+      padding: 1rem;
+      border-top: 1px solid var(--areia-escura);
+    }
+
+    .produto-admin-cat {
+      font-family: 'Cinzel', serif;
+      font-size: .5rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: .3rem;
+    }
+
+    .produto-admin-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: .3rem;
+    }
+
+    .produto-admin-preco {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: var(--gold);
+      margin-bottom: .8rem;
+    }
+
+    .produto-admin-acoes {
+      display: flex;
+      gap: .4rem;
+    }
+
+    .badge-inativo {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: .48rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      background: #fdecea;
+      color: var(--danger);
+      padding: .2rem .6rem;
+      margin-left: .5rem;
+    }
+
+    /* Fotos preview */
+    .fotos-preview {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      margin-top: .6rem;
+    }
+
+    .foto-preview-item {
+      position: relative;
+    }
+
+    .foto-preview-item img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(42,42,42,.1);
+    }
+
+    .foto-remove-btn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      background: rgba(192,57,43,.85);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .add-foto-btn {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--teal);
+      border: 1px dashed var(--teal);
+      padding: .5rem .9rem;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: .5rem;
+    }
+
+    .add-foto-btn:hover { background: rgba(91,188,176,.08); }
+
+    .foto-url-input {
+      width: 100%;
+      padding: .6rem .8rem;
+      border: 1px solid rgba(42,42,42,.15);
+      background: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem;
+      color: var(--dark);
+      outline: none;
+      margin-top: .4rem;
+      transition: border-color .2s;
+    }
+
+    .foto-url-input:focus { border-color: var(--gold); }
+
+    .foto-add-confirm {
+      font-family: 'Cinzel', serif;
+      font-size: .52rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: var(--dark);
+      color: var(--areia);
+      border: none;
+      padding: .5rem 1rem;
+      cursor: pointer;
+      margin-top: .4rem;
+      transition: background .2s;
+    }
+
+    .foto-add-confirm:hover { background: var(--teal); }
+
+    /* Toast */
+    .admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--dark);
+      color: var(--areia);
+      font-family: 'Cinzel', serif;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 1rem 1.8rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .admin-toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { height: auto; position: relative; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .main { padding: 1.5rem; }
+      .produtos-admin-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .produtos-admin-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">SOL</div>
+    <div class="login-sub">Painel Administrativo</div>
+    <div class="login-divider"></div>
+    <input type="password" id="senha-input" class="login-input" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter') entrar()"/>
+    <button class="login-btn" onclick="entrar()">Acessar Painel</button>
+    <p class="login-erro" id="login-erro"></p>
+  </div>
+</div>
+
+<!-- ── PAINEL ── -->
+<div id="painel">
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        SOL
+        <span>Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item ativo" onclick="mostrarAba('dashboard', this)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" onclick="mostrarAba('produtos', this)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Produtos
+        </button>
+        <button class="nav-item" onclick="mostrarAba('pedidos', this)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Pedidos
+        </button>
+        <button class="nav-item" onclick="mostrarAba('clientes', this)">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Clientes
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="sair()">Sair</button>
+      </div>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="main">
+
+      <!-- Dashboard -->
+      <div id="tab-dashboard" class="tab-content ativo">
+        <div class="page-header">
+          <div class="page-header-left">
+            <div class="page-subtitulo">Visão Geral</div>
+            <h1 class="page-titulo">Dashboard</h1>
+          </div>
+        </div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="loading">Carregando...</div>
+        </div>
+        <p class="section-titulo">Últimos Pedidos</p>
+        <div class="tabela-wrap" id="ultimos-pedidos">
+          <div class="loading">Carregando...</div>
+        </div>
+      </div>
+
+      <!-- Produtos -->
+      <div id="tab-produtos" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-left">
+            <div class="page-subtitulo">Catálogo</div>
+            <h1 class="page-titulo">Produtos</h1>
+          </div>
+          <button class="btn-primary" onclick="abrirModalProduto()">+ Novo Produto</button>
+        </div>
+        <div id="produtos-lista">
+          <div class="loading">Carregando...</div>
+        </div>
+      </div>
+
+      <!-- Pedidos -->
+      <div id="tab-pedidos" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-left">
+            <div class="page-subtitulo">Gestão</div>
+            <h1 class="page-titulo">Todos os Pedidos</h1>
+          </div>
+        </div>
+        <div class="tabela-wrap" id="tabela-pedidos">
+          <div class="loading">Carregando...</div>
+        </div>
+      </div>
+
+      <!-- Clientes -->
+      <div id="tab-clientes" class="tab-content">
+        <div class="page-header">
+          <div class="page-header-left">
+            <div class="page-subtitulo">Cadastros</div>
+            <h1 class="page-titulo">Clientes</h1>
+          </div>
+        </div>
+        <div class="tabela-wrap" id="tabela-clientes">
+          <div class="loading">Carregando...</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ── MODAL DE PRODUTO ── -->
+<div class="modal-overlay" id="modal-produto" onclick="fecharModalSeOverlay(event)">
+  <div class="modal-box">
+    <h2 class="modal-titulo" id="modal-produto-titulo">Novo Produto</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Nome do Produto *</label>
+        <input type="text" id="prod-nome" class="form-input" placeholder="Ex: Biquíni Oceano"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preço *</label>
+        <input type="text" id="prod-preco" class="form-input" placeholder="Ex: R$ 199,90"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Categoria *</label>
+      <select id="prod-categoria" class="form-select">
+        <option value="">Selecione...</option>
+        <option value="biquinis">Biquínis</option>
+        <option value="maios">Maiôs</option>
+        <option value="maisvendidos">Mais Vendidos</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Descrição</label>
+      <textarea id="prod-descricao" class="form-textarea" placeholder="Descreva o produto..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Tamanhos disponíveis</label>
+      <div style="display:flex;gap:.6rem;margin-top:.4rem">
+        <label style="display:flex;align-items:center;gap:.3rem;font-size:.85rem;cursor:pointer">
+          <input type="checkbox" id="tam-P" value="P" checked> P
+        </label>
+        <label style="display:flex;align-items:center;gap:.3rem;font-size:.85rem;cursor:pointer">
+          <input type="checkbox" id="tam-M" value="M" checked> M
+        </label>
+        <label style="display:flex;align-items:center;gap:.3rem;font-size:.85rem;cursor:pointer">
+          <input type="checkbox" id="tam-G" value="G" checked> G
+        </label>
+        <label style="display:flex;align-items:center;gap:.3rem;font-size:.85rem;cursor:pointer">
+          <input type="checkbox" id="tam-GG" value="GG" checked> GG
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Fotos (URLs das imagens)</label>
+      <div id="fotos-preview" class="fotos-preview"></div>
+      <button class="add-foto-btn" onclick="mostrarInputFoto()">+ Adicionar foto</button>
+      <div id="foto-input-wrap" style="display:none;margin-top:.6rem">
+        <input type="text" id="foto-url-input" class="foto-url-input" placeholder="Cole aqui a URL da imagem..."/>
+        <button class="foto-add-confirm" onclick="confirmarFoto()">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="form-group" id="campo-ativo" style="display:none">
+      <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.85rem">
+        <input type="checkbox" id="prod-ativo" checked>
+        Produto ativo (visível na loja)
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancelar" onclick="fecharModalProduto()">Cancelar</button>
+      <button class="btn-primary" onclick="salvarProduto()">Salvar Produto</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="admin-toast"></div>
+
+<script src="js/config.js"></script>
+<script>
+  const API = window.SOL_CONFIG?.ADMIN_API_BASE_URL || `${window.location.origin}/api/admin`;
+  let SENHA = '';
+
+  function setLoginError(message = '') {
+    document.getElementById('login-erro').textContent = message;
+  }
+
+  /* ── Login ── */
+  async function entrar() {
+    const s = document.getElementById('senha-input').value.trim();
+    const botao = document.querySelector('.login-btn');
+
+    if (!s) {
+      setLoginError('Digite a senha para acessar o painel.');
+      return;
+    }
+
+    setLoginError('');
+    botao.disabled = true;
+    botao.textContent = 'Validando...';
+
+    try {
+      const resposta = await fetch(`${API}/stats`, { headers: { 'x-admin-senha': s } });
+
+      if (resposta.status === 401) {
+        setLoginError('Senha incorreta. Tente novamente.');
+        return;
+      }
+
+      if (!resposta.ok) {
+        setLoginError('Não foi possível conectar ao painel agora.');
+        return;
+      }
+
+      SENHA = s;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('painel').style.display = 'block';
+      await carregarTudo();
+    } catch (_erro) {
+      setLoginError('Servidor indisponível. Verifique se o back-end está ligado.');
+    } finally {
+      botao.disabled = false;
+      botao.textContent = 'Acessar Painel';
+    }
+  }
+
+  function sair() { SENHA = ''; location.reload(); }
+
+  /* ── Navegação ── */
+  function mostrarAba(aba, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('ativo'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('ativo'));
+    document.getElementById(`tab-${aba}`).classList.add('ativo');
+    btn.classList.add('ativo');
+  }
+
+  function headers() {
+    return { 'x-admin-senha': SENHA, 'Content-Type': 'application/json' };
+  }
+
+  async function carregarTudo() {
+    await Promise.all([carregarStats(), carregarPedidos(), carregarClientes(), carregarProdutos()]);
+  }
+
+  /* ── Stats ── */
+  async function carregarStats() {
+    const r = await fetch(`${API}/stats`, { headers: headers() });
+    const s = await r.json();
+
+    document.getElementById('stats-grid').innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">Total de Pedidos</div>
+        <div class="stat-valor">${s.totalPedidos}</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-label">Clientes Cadastrados</div>
+        <div class="stat-valor">${s.totalClientes}</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-label">Receita Total</div>
+        <div class="stat-valor">R$&nbsp;${s.totalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pedidos Pendentes</div>
+        <div class="stat-valor">${s.pendentes}</div>
+      </div>
+    `;
+  }
+
+  /* ── Pedidos ── */
+  async function carregarPedidos() {
+    const r = await fetch(`${API}/orders`, { headers: headers() });
+    const pedidos = await r.json();
+
+    const html = pedidos.length === 0
+      ? '<p class="empty">Nenhum pedido ainda.</p>'
+      : `<table>
+          <thead><tr>
+            <th>#</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Pagamento</th><th>Data</th><th>Status</th>
+          </tr></thead>
+          <tbody>
+            ${pedidos.map(p => `
+              <tr>
+                <td style="color:var(--muted);font-size:.8rem">${p.id.slice(-6)}</td>
+                <td>
+                  <div class="cliente-info">
+                    <div class="cliente-avatar">${(p.cliente.name || '?').charAt(0)}</div>
+                    <div>
+                      <div class="cliente-nome">${p.cliente.name || 'Desconhecido'}</div>
+                      <div class="cliente-email">${p.cliente.email || '-'}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="itens-lista">${(p.items || []).map(i => `${i.name} (x${i.qty})`).join(', ') || '—'}</td>
+                <td style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem">${p.total}</td>
+                <td><span class="status ${p.paymentMethod || 'pendente'}">${formatPaymentMethod(p.paymentMethod)}</span></td>
+                <td style="color:var(--muted);font-size:.82rem">${new Date(p.createdAt).toLocaleDateString('pt-BR')}</td>
+                <td>
+                  <select class="status-select" onchange="atualizarStatus('${p.id}', this.value)">
+                    ${['pendente','confirmado','enviado','entregue','cancelado'].map(s =>
+                      `<option value="${s}" ${p.status === s ? 'selected' : ''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`
+                    ).join('')}
+                  </select>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+
+    document.getElementById('tabela-pedidos').innerHTML = html;
+
+    const ultimos = pedidos.slice(0, 5);
+    document.getElementById('ultimos-pedidos').innerHTML = ultimos.length === 0
+      ? '<p class="empty">Nenhum pedido ainda.</p>'
+      : `<table>
+          <thead><tr><th>Cliente</th><th>Total</th><th>Pagamento</th><th>Data</th><th>Status</th></tr></thead>
+          <tbody>
+            ${ultimos.map(p => `
+              <tr>
+                <td>${p.cliente.name || 'Desconhecido'}</td>
+                <td style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem">${p.total}</td>
+                <td><span class="status ${p.paymentMethod || 'pendente'}">${formatPaymentMethod(p.paymentMethod)}</span></td>
+                <td style="color:var(--muted);font-size:.82rem">${new Date(p.createdAt).toLocaleDateString('pt-BR')}</td>
+                <td><span class="status ${p.status}">${p.status}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+  }
+
+  function formatPaymentMethod(method) {
+    const methods = {
+      'credito': 'Crédito',
+      'debito': 'Débito',
+      'pix': 'PIX',
+      'whatsapp': 'WhatsApp',
+      'nao_definido': 'Pendente',
+      'pendente': 'Pendente'
+    };
+    return methods[method] || method || 'Pendente';
+  }
+
+  /* ── Clientes ── */
+  async function carregarClientes() {
+    const r = await fetch(`${API}/users`, { headers: headers() });
+    const clientes = await r.json();
+
+    document.getElementById('tabela-clientes').innerHTML = clientes.length === 0
+      ? '<p class="empty">Nenhum cliente cadastrado ainda.</p>'
+      : `<table>
+          <thead><tr><th>Cliente</th><th>E-mail</th><th>Endereço</th><th>Cadastro</th></tr></thead>
+          <tbody>
+            ${clientes.map(c => `
+              <tr>
+                <td>
+                  <div class="cliente-info">
+                    <div class="cliente-avatar">
+                      ${c.photo ? `<img src="${c.photo}" alt="${c.name}"/>` : c.name.charAt(0)}
+                    </div>
+                    <div class="cliente-nome">${c.name}</div>
+                  </div>
+                </td>
+                <td style="color:var(--muted)">${c.email}</td>
+                <td style="color:var(--muted);font-size:.85rem">${c.address || '—'}</td>
+                <td style="color:var(--muted);font-size:.82rem">${new Date(c.createdAt).toLocaleDateString('pt-BR')}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+  }
+
+  async function atualizarStatus(id, status) {
+    await fetch(`${API}/orders/${id}/status`, {
+      method: 'PATCH',
+      headers: headers(),
+      body: JSON.stringify({ status })
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     PRODUTOS
+  ══════════════════════════════════════════ */
+  let _editandoId = null;
+  let _fotosTemp = [];
+
+  async function carregarProdutos() {
+    const r = await fetch(`${API}/products`, { headers: headers() });
+    const produtos = await r.json();
+    renderProdutos(produtos);
+  }
+
+  function renderProdutos(produtos) {
+    const container = document.getElementById('produtos-lista');
+
+    if (produtos.length === 0) {
+      container.innerHTML = `
+        <div style="text-align:center;padding:4rem;color:var(--muted)">
+          <p style="font-style:italic;margin-bottom:1.5rem">Nenhum produto cadastrado ainda.</p>
+          <button class="btn-primary" onclick="abrirModalProduto()">+ Cadastrar primeiro produto</button>
+        </div>`;
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="produtos-admin-grid">
+        ${produtos.map(p => `
+          <div class="produto-admin-card">
+            ${p.fotos && p.fotos[0]
+              ? `<img class="produto-admin-thumb" src="${p.fotos[0]}" alt="${p.nome}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+                 <div class="produto-admin-thumb-placeholder" style="display:none">
+                   <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                 </div>`
+              : `<div class="produto-admin-thumb-placeholder">
+                   <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                 </div>`
+            }
+            <div class="produto-admin-info">
+              <div class="produto-admin-cat">${p.categoria}</div>
+              <div class="produto-admin-nome">
+                ${p.nome}
+                ${!p.ativo ? '<span class="badge-inativo">Inativo</span>' : ''}
+              </div>
+              <div class="produto-admin-preco">${p.preco}</div>
+              <div class="produto-admin-acoes">
+                <button class="btn-edit" onclick="editarProduto('${p.id}')">Editar</button>
+                <button class="btn-danger" onclick="excluirProduto('${p.id}', '${p.nome.replace(/'/g,"\\'")}')">Excluir</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+  }
+
+  /* ── Abrir modal novo ── */
+  function abrirModalProduto() {
+    _editandoId = null;
+    _fotosTemp = [];
+    document.getElementById('modal-produto-titulo').textContent = 'Novo Produto';
+    document.getElementById('prod-nome').value = '';
+    document.getElementById('prod-preco').value = '';
+    document.getElementById('prod-categoria').value = '';
+    document.getElementById('prod-descricao').value = '';
+    document.getElementById('campo-ativo').style.display = 'none';
+    ['P','M','G','GG'].forEach(t => {
+      document.getElementById(`tam-${t}`).checked = true;
+    });
+    renderFotosPreview();
+    document.getElementById('foto-input-wrap').style.display = 'none';
+    document.getElementById('modal-produto').classList.add('aberto');
+  }
+
+  /* ── Abrir modal edição ── */
+  async function editarProduto(id) {
+    const r = await fetch(`${API}/products/${id}`, { headers: headers() });
+    const p = await r.json();
+
+    _editandoId = id;
+    _fotosTemp = [...(p.fotos || [])];
+
+    document.getElementById('modal-produto-titulo').textContent = 'Editar Produto';
+    document.getElementById('prod-nome').value = p.nome;
+    document.getElementById('prod-preco').value = p.preco;
+    document.getElementById('prod-categoria').value = p.categoria;
+    document.getElementById('prod-descricao').value = p.descricao || '';
+    document.getElementById('prod-ativo').checked = p.ativo !== false;
+    document.getElementById('campo-ativo').style.display = 'block';
+
+    ['P','M','G','GG'].forEach(t => {
+      document.getElementById(`tam-${t}`).checked = (p.tamanhos || []).includes(t);
+    });
+
+    renderFotosPreview();
+    document.getElementById('foto-input-wrap').style.display = 'none';
+    document.getElementById('modal-produto').classList.add('aberto');
+  }
+
+  function fecharModalProduto() {
+    document.getElementById('modal-produto').classList.remove('aberto');
+  }
+
+  function fecharModalSeOverlay(e) {
+    if (e.target.id === 'modal-produto') fecharModalProduto();
+  }
+
+  /* ── Fotos ── */
+  function renderFotosPreview() {
+    const container = document.getElementById('fotos-preview');
+    container.innerHTML = _fotosTemp.map((url, i) => `
+      <div class="foto-preview-item">
+        <img src="${url}" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;64&quot; height=&quot;64&quot;><rect width=&quot;64&quot; height=&quot;64&quot; fill=&quot;%23EDE8E2&quot;/></svg>'"/>
+        <button class="foto-remove-btn" onclick="removerFoto(${i})">×</button>
+      </div>
+    `).join('');
+  }
+
+  function mostrarInputFoto() {
+    const wrap = document.getElementById('foto-input-wrap');
+    wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+    if (wrap.style.display === 'block') {
+      document.getElementById('foto-url-input').focus();
+    }
+  }
+
+  function confirmarFoto() {
+    const input = document.getElementById('foto-url-input');
+    const url = input.value.trim();
+    if (!url) return;
+    _fotosTemp.push(url);
+    renderFotosPreview();
+    input.value = '';
+    document.getElementById('foto-input-wrap').style.display = 'none';
+  }
+
+  function removerFoto(idx) {
+    _fotosTemp.splice(idx, 1);
+    renderFotosPreview();
+  }
+
+  /* ── Salvar ── */
+  async function salvarProduto() {
+    const nome = document.getElementById('prod-nome').value.trim();
+    const preco = document.getElementById('prod-preco').value.trim();
+    const categoria = document.getElementById('prod-categoria').value;
+    const descricao = document.getElementById('prod-descricao').value.trim();
+    const ativo = document.getElementById('prod-ativo').checked;
+
+    const tamanhos = ['P','M','G','GG'].filter(t =>
+      document.getElementById(`tam-${t}`).checked
+    );
+
+    if (!nome || !preco || !categoria) {
+      mostrarToast('Preencha nome, preço e categoria!');
+      return;
+    }
+
+    const body = { nome, preco, categoria, descricao, tamanhos, fotos: _fotosTemp };
+
+    if (_editandoId) {
+      body.ativo = ativo;
+      await fetch(`${API}/products/${_editandoId}`, {
+        method: 'PUT',
+        headers: headers(),
+        body: JSON.stringify(body)
+      });
+      mostrarToast('Produto atualizado!');
+    } else {
+      await fetch(`${API}/products`, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(body)
+      });
+      mostrarToast('Produto criado!');
+    }
+
+    fecharModalProduto();
+    carregarProdutos();
+  }
+
+  /* ── Excluir ── */
+  async function excluirProduto(id, nome) {
+    if (!confirm(`Excluir "${nome}"? Esta ação não pode ser desfeita.`)) return;
+
+    await fetch(`${API}/products/${id}`, {
+      method: 'DELETE',
+      headers: headers()
+    });
+
+    mostrarToast('Produto excluído.');
+    carregarProdutos();
+  }
+
+  /* ── Toast ── */
+  function mostrarToast(msg) {
+    const t = document.getElementById('admin-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  /* Enter no login */
+  document.getElementById('senha-input').focus();
+</script>
+</body>
+</html>

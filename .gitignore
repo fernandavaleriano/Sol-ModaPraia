@@ -1,0 +1,39 @@
+# ── Dependências Node ──
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Variáveis de ambiente ──
+.env
+.env.local
+.env.production
+.env.*
+!.env.example
+!back-end/.env.example
+
+# ── Banco de dados local ──
+back-end/db/data.json
+
+# ── PM2 ──
+.pm2/
+
+# ── Logs ──
+logs/
+*.log
+
+# ── Sistema operacional ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── VS Code ──
+.vscode/
+*.code-workspace
+
+# ── Build / cache ──
+dist/
+build/
+.cache/
+tmp/
+temp/

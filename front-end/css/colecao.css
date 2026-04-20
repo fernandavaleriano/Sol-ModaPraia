@@ -1,0 +1,164 @@
+/* ── SEÇÃO COLEÇÃO — redesign pastel/clean ── */
+
+.colecao {
+  background: #fff7ed;
+  padding: 7rem 4rem 8rem;
+  position: relative;
+}
+
+/* Linha decorativa sutil no topo, conecta com o hero */
+.colecao::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #C9A96E66);
+}
+
+/* ── Header ── */
+.colecao-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+.colecao-badge {
+  font-family: 'Cinzel', serif;
+  font-size: .6rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: #75c4b7;
+}
+
+.colecao-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: #2a2a2a;
+  letter-spacing: .04em;
+  line-height: 1.1;
+}
+
+.colecao-divider {
+  width: 36px;
+  height: 1px;
+  background: #C9A96E;
+  opacity: .55;
+}
+
+/* ── Grid de categorias ── */
+.colecao-categorias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ── Card individual ── */
+.categoria-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.categoria-nome {
+  font-family: 'Cinzel', serif;
+  font-size: .68rem;
+  font-weight: 400;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: #5a5a5a;
+  transition: color .3s;
+}
+
+.categoria-card:hover .categoria-nome {
+  color: #C9A96E;
+}
+
+/* ── Imagem ── */
+.categoria-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #EDE8E2;
+}
+
+.categoria-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: brightness(.96) saturate(.95);
+  transition: transform .7s ease, filter .4s ease;
+}
+
+.categoria-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 243, 238, 0);
+  border: 1px solid rgba(201, 169, 110, 0);
+  transition: border-color .4s, background .4s;
+}
+
+.categoria-overlay::after {
+  content: 'VER';
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  font-family: 'Cinzel', serif;
+  font-size: .6rem;
+  letter-spacing: .3em;
+  color: #2a2a2a;
+  background: rgba(247, 243, 238, .85);
+  padding: .45rem 1.2rem;
+  opacity: 0;
+  transition: opacity .35s ease, transform .35s ease;
+  backdrop-filter: blur(4px);
+}
+
+.categoria-card:hover .categoria-img-wrap img {
+  transform: scale(1.04);
+  filter: brightness(.92) saturate(1.05);
+}
+
+.categoria-card:hover .categoria-overlay {
+  border-color: rgba(201, 169, 110, .3);
+  background: rgba(247, 243, 238, .08);
+}
+
+.categoria-card:hover .categoria-overlay::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 900px) {
+  .colecao-categorias {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .colecao {
+    padding: 5rem 1.5rem 6rem;
+  }
+  .colecao-categorias {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+  }
+}

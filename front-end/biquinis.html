@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/produtos.css">
+  <link rel="shortcut icon" href="imagens/sol-sol-removebg-preview.png" type="image/x-icon">
+  <title>Biquínis — Sol Moda Praia</title>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">SOL</a>
+  <ul class="nav-links">
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#colecao">Coleção</a></li>
+    <li><a href="index.html#contato">Contato</a></li>
+  </ul>
+  <a class="nav-cta" href="index.html#contato">Comprar</a>
+</nav>
+
+<div class="cat-hero">
+  <a class="cat-voltar reveal" href="index.html#colecao">← Voltar para Coleção</a>
+  <span class="cat-badge reveal reveal-delay-1">Verão 2026</span>
+  <h1 class="cat-titulo reveal reveal-delay-2">Biquínis</h1>
+  <div class="cat-divider reveal reveal-delay-3"></div>
+</div>
+
+<section class="produtos-section">
+  <div class="produtos-grid">
+
+    <article class="produto-card reveal reveal-delay-1" data-descricao="Tecido de alta sustentação com proteção UV50+, alças reguláveis e acabamento premium que abraça cada curva com elegância. Do deck ao mergulho, ele acompanha você.">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini.png" alt="Biquíni Oceano"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com branco (1).jpeg" alt="Biquíni Oceano — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com branco (2).jpeg" alt="Biquíni Oceano — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquini Oceano</h3>
+        <span class="produto-preco">R$ 199,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-2" data-descricao="Fluido como o mar na maré cheia. O Biquíni Ondas tem bojo removível, regulagem fina nas alças e tecido que não desbota — porque o verão merece ser vivido sem preocupação.">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (2).png" alt="Biquíni Ondas"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini rosa (3).jpeg" alt="Biquíni Ondas — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini rosa (4).jpeg" alt="Biquíni Ondas — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Ondas</h3>
+        <span class="produto-preco">R$ 159,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-3" data-descricao="Tecido texturizado com toque acetinado e resistência à água salgada e cloro. Ajuste perfeitamente ao corpo">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (3).png" alt="Biquíni Coral"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini branco (1).jpeg" alt="Biquíni Coral — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini branco (2).jpeg" alt="Biquíni Coral — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Coral</h3>
+        <span class="produto-preco">R$ 144,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-1" data-descricao="Sofisticado, atemporal. O Biquíni Coqueiro em tom Preto é a escolha das que sabem que menos é mais.
+     Conforto real, bronzeado perfeito.">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (4).png" alt="Biquíni Coqueiro"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com dourado (1).jpeg" alt="Biquíni Coqueiro — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com dourado (2).jpeg" alt="Biquíni Coqueiro — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Coqueiro</h3>
+        <span class="produto-preco">R$ 154,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-2" data-descricao="Feito para quem não tem medo de se destacar. O Biquíni Maresia combina cor vibrante com corte estratégico que valoriza o quadril e alonga a silhueta. Ideal para longos dias de praia.">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (5).jpeg" alt="Biquíni Maresia"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini laranja (1).jpeg" alt="Biquíni Maresia — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini laranja (2).jpeg" alt="Biquíni Maresia — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Maresia</h3>
+        <span class="produto-preco">R$ 169,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-3" data-descricao="Leve como a espuma da onda.
+     Tecido de microfibra com secagem ultrarrápida e toque macio na pele. Da praia ao happy hour sem trocar de look.">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (6).jpeg" alt="Biquíni Espuma"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini verde com branco (1).jpeg" alt="Biquíni Espuma — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini verde com branco (2).jpeg" alt="Biquíni Espuma — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Espuma</h3>
+        <span class="produto-preco">R$ 149,90</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>

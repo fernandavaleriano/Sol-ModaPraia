@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/produtos.css">
+  <link rel="shortcut icon" href="imagens/sol-sol-removebg-preview.png" type="image/x-icon">
+  <title>Mais Vendidos — Sol Moda Praia</title>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">SOL</a>
+  <ul class="nav-links">
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#colecao">Coleção</a></li>
+    <li><a href="index.html#contato">Contato</a></li>
+  </ul>
+  <a class="nav-cta" href="index.html#contato">Comprar</a>
+</nav>
+
+<div class="cat-hero">
+  <a class="cat-voltar reveal" href="index.html#colecao">← Voltar para Coleção</a>
+  <span class="cat-badge reveal reveal-delay-1">Verão 2026</span>
+  <h1 class="cat-titulo reveal reveal-delay-2">Mais Vendidos</h1>
+  <div class="cat-divider reveal reveal-delay-3"></div>
+</div>
+
+<section class="produtos-section">
+  <div class="produtos-grid">
+
+    <article class="produto-card reveal reveal-delay-1">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (2).png" alt="Biquíni Ondas"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini rosa (3).jpeg" alt="Biquíni Ondas — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini rosa (4).jpeg" alt="Biquíni Ondas — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Ondas</h3>
+        <span class="produto-preco">R$ 159,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-2">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/maio/maio (5).png" alt="Maiô Horizonte"/></div>
+          <div class="produto-slide"><img src="imagens/maio/maio estampado 01.jpeg" alt="Maiô Horizonte — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/maio/maio florido.jpeg" alt="Maiô Horizonte — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Maiô Horizonte</h3>
+        <span class="produto-preco">R$ 219,90</span>
+      </div>
+    </article>
+
+    <article class="produto-card reveal reveal-delay-3">
+      <div class="produto-img-wrap">
+        <div class="produto-slides">
+          <div class="produto-slide ativo"><img src="imagens/biquini/biquini (4).png" alt="Biquíni Coqueiro"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com dourado (1).jpeg" alt="Biquíni Coqueiro — foto 2"/></div>
+          <div class="produto-slide"><img src="imagens/biquini/biquini preto com dourado (2).jpeg" alt="Biquíni Coqueiro — foto 3"/></div>
+          <button class="slide-btn slide-btn-prev">&#8592;</button>
+          <button class="slide-btn slide-btn-next">&#8594;</button>
+          <div class="slide-dots">
+            <button class="slide-dot ativo"></button>
+            <button class="slide-dot"></button>
+            <button class="slide-dot"></button>
+          </div>
+        </div>
+        <div class="produto-painel">
+          <p class="painel-label">Tamanho</p>
+          <div class="painel-tamanhos">
+            <button class="tam-btn" onclick="selecionarTamanho(this)">P</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">M</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">G</button>
+            <button class="tam-btn" onclick="selecionarTamanho(this)">GG</button>
+          </div>
+          <button class="produto-overlay-btn">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="produto-info">
+        <h3 class="produto-nome">Biquíni Coqueiro</h3>
+        <span class="produto-preco">R$ 154,90</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>

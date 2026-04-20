@@ -1,0 +1,121 @@
+footer#contato {
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,.07);
+  padding: 6rem 4rem 2.5rem;
+}
+
+.footer-wrapper {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.footer-texto .section-label {
+  font-size: .65rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.footer-texto .section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.2;
+  margin-bottom: 1.4rem;
+  color: #fff;
+}
+
+.footer-texto .section-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.footer-texto p {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: rgba(245,240,235,.65);
+  margin-bottom: 2rem;
+}
+
+.footer-endereco {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.footer-endereco svg { color: var(--gold); flex-shrink: 0; }
+
+.footer-btns-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 2rem;
+  font-size: .8rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .3s ease;
+  border: 1px solid transparent;
+}
+
+.btn-wpp { background: #25D366; color: #fff; }
+.btn-wpp:hover { background: transparent; border-color: #25D366; color: #25D366; }
+
+.btn-ig { background: transparent; border-color: var(--teal); color: var(--teal); }
+.btn-ig:hover { background: var(--teal); color: var(--dark); }
+
+.btn-email { background: transparent; border-color: var(--gold); color: var(--gold); }
+.btn-email:hover { background: var(--gold); color: var(--dark); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo { height: 36px; opacity: .7; }
+
+.footer-bottom p {
+  font-size: .65rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+
+.footer-nav a {
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  text-decoration: none;
+  margin-left: 1.6rem;
+  transition: color .3s;
+}
+.footer-nav a:hover { color: var(--teal); }
+
+@media (max-width: 768px) {
+  footer#contato { padding: 4.5rem 1.5rem 2rem; }
+  .footer-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-nav a { margin: 0 .6rem; }
+}

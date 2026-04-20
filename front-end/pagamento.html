@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pagamento.css">
+  <link rel="shortcut icon" href="imagens/sol-sol-removebg-preview.png" type="image/x-icon">
+  <title>Pagamento — Sol Moda Praia</title>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">SOL</a>
+  <ul class="nav-links">
+    <li><a href="index.html#sobre">Sobre</a></li>
+    <li><a href="index.html#colecao">Coleção</a></li>
+    <li><a href="index.html#contato">Contato</a></li>
+  </ul>
+  <a class="nav-cta" href="index.html#colecao">Ver Coleção</a>
+</nav>
+
+<!-- Hero -->
+<div class="pag-hero">
+  <span class="pag-badge">Finalizar Compra</span>
+  <h1 class="pag-titulo">Pagamento</h1>
+  <div class="pag-divider"></div>
+</div>
+
+<!-- Layout -->
+<div class="pag-layout">
+
+  <!-- ── COLUNA ESQUERDA ── -->
+  <div class="pag-col-esq">
+    <span class="pag-section-label">Forma de Pagamento</span>
+
+    <!-- Abas -->
+    <div class="metodos-tabs">
+      <button class="metodo-tab ativo" onclick="trocarMetodo('credito', this)">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24">
+          <rect x="1" y="4" width="22" height="16" rx="2"/>
+          <line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+        Crédito
+      </button>
+      <button class="metodo-tab" onclick="trocarMetodo('debito', this)">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24">
+          <rect x="1" y="4" width="22" height="16" rx="2"/>
+          <line x1="1" y1="10" x2="23" y2="10"/>
+          <line x1="5" y1="15" x2="9" y2="15"/>
+        </svg>
+        Débito
+      </button>
+      <button class="metodo-tab" onclick="trocarMetodo('pix', this)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        Pix
+      </button>
+    </div>
+
+    <!-- Cartão de Crédito -->
+    <div class="metodo-painel ativo" id="painel-credito">
+      <div class="form-group">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" placeholder="Seu nome completo" id="customer-name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="voce@exemplo.com" id="customer-email"/>
+      </div>
+      <p style="color:#8b8178;font-size:.95rem;line-height:1.6;margin:0 0 1.2rem">
+        Ao continuar, você será direcionado ao ambiente seguro do Mercado Pago para concluir o pagamento com cartão.
+      </p>
+      <div class="form-group">
+        <label class="form-label">Parcelas estimadas</label>
+        <select class="form-input" id="cc-parcelas" style="cursor:pointer"></select>
+      </div>
+      <button class="btn-confirmar" id="btn-credito" onclick="confirmarPagamento('credito')">Pagar com Mercado Pago</button>
+    </div>
+
+    <!-- Débito -->
+    <div class="metodo-painel" id="painel-debito">
+      <div class="form-group">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" placeholder="Seu nome completo" id="debit-customer-name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="voce@exemplo.com" id="debit-customer-email"/>
+      </div>
+      <p style="color:#8b8178;font-size:.95rem;line-height:1.6;margin:0 0 1.2rem">
+        O débito também será finalizado no checkout oficial do Mercado Pago, com ambiente seguro e validação real do pagamento.
+      </p>
+      <button class="btn-confirmar" id="btn-debito" onclick="confirmarPagamento('debito')">Ir para o Checkout</button>
+    </div>
+
+    <!-- Pix -->
+    <div class="metodo-painel" id="painel-pix">
+      <div class="pix-wrap">
+        <div class="form-group" style="width:100%;max-width:400px">
+          <label class="form-label">Nome completo</label>
+          <input type="text" class="form-input" placeholder="Seu nome completo" id="pix-customer-name"/>
+        </div>
+        <div class="form-group" style="width:100%;max-width:400px">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="voce@exemplo.com" id="pix-customer-email"/>
+        </div>
+
+        <p class="pix-info" style="margin-top:0">
+          Para pagamento real, o cliente também será direcionado ao Checkout Pro do Mercado Pago. Lá ele poderá escolher Pix, cartão e outros meios liberados na conta.
+        </p>
+
+        <button class="btn-confirmar" id="btn-pix" onclick="confirmarPagamento('pix')" style="width:100%;max-width:400px">
+          Pagar com Mercado Pago
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirmação -->
+    <div class="confirmacao-wrap" id="confirmacao-wrap">
+      <div class="confirmacao-icone">
+        <svg width="28" height="28" fill="none" stroke="#5BBCB0" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h2 class="confirmacao-titulo">Pedido Recebido!</h2>
+      <p class="confirmacao-sub">
+        Em breve entraremos em contato para confirmar seu pedido e combinar a entrega. Obrigada por comprar na Sol! 🌊
+      </p>
+      <a href="index.html" class="confirmacao-btn">Voltar à Loja</a>
+    </div>
+  </div>
+
+  <!-- ── COLUNA DIREITA — resumo ── -->
+  <aside class="pag-resumo">
+    <div class="resumo-titulo">Resumo do Pedido</div>
+
+    <div id="resumo-itens"></div>
+
+    <div class="resumo-divider"></div>
+
+    <div class="resumo-total-linha">
+      <span class="resumo-total-label">Subtotal</span>
+      <span class="resumo-total-val" id="resumo-subtotal">R$ 0,00</span>
+    </div>
+    <div class="resumo-total-linha">
+      <span class="resumo-total-label">Frete</span>
+      <span class="resumo-total-val" id="resumo-frete" style="color:#5BBCB0">Grátis</span>
+    </div>
+    <div class="resumo-divider"></div>
+    <div class="resumo-total-linha destaque">
+      <span class="resumo-total-label">Total</span>
+      <span class="resumo-total-val" id="resumo-total">R$ 0,00</span>
+    </div>
+
+    <div class="wpp-box">
+      <p class="wpp-texto">
+        Está com dúvidas? Nos mande uma mensagem, estamos aqui para te ajudar! 🌊
+      </p>
+      <a class="wpp-btn" href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" id="pagamento-whatsapp-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </aside>
+
+</div>
+
+<div class="pag-toast" id="pag-toast"></div>
+
+<script src="js/config.js"></script>
+<script>
+  const cart = JSON.parse(localStorage.getItem('sol_cart') || '[]');
+  const API_BASE_URL = window.SOL_CONFIG?.API_BASE_URL || `${window.location.origin}/api`;
+  const PENDING_ORDER_STORAGE_KEY = 'sol_pending_order';
+
+  function fmt(val) {
+    return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  }
+
+  function parsePreco(str) {
+    return parseFloat(String(str).replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
+  }
+
+  function getResumoValores() {
+    const subtotal = cart.reduce((s, i) => s + parsePreco(i.price) * i.qty, 0);
+    const frete = subtotal >= 299 ? 0 : 19.90;
+    const total = subtotal + frete;
+
+    return { subtotal, frete, total };
+  }
+
+  function getPendingOrder() {
+    try {
+      return JSON.parse(localStorage.getItem(PENDING_ORDER_STORAGE_KEY) || 'null');
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function setPendingOrder(data) {
+    localStorage.setItem(PENDING_ORDER_STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function clearPendingOrder() {
+    localStorage.removeItem(PENDING_ORDER_STORAGE_KEY);
+  }
+
+  function updateResumoTotais() {
+    const { subtotal, frete, total } = getResumoValores();
+
+    document.getElementById('resumo-subtotal').textContent = fmt(subtotal);
+    document.getElementById('resumo-frete').textContent = frete === 0 ? 'Grátis' : fmt(frete);
+    document.getElementById('resumo-frete').style.color = frete === 0 ? '#5BBCB0' : '#2a2a2a';
+    document.getElementById('resumo-total').textContent = fmt(total);
+
+    const select = document.getElementById('cc-parcelas');
+    select.innerHTML = '';
+
+    if (total <= 0) {
+      const opt = document.createElement('option');
+      opt.value = 1;
+      opt.textContent = 'Carrinho vazio';
+      select.appendChild(opt);
+      return;
+    }
+
+    for (let i = 1; i <= 6; i++) {
+      const val = total / i;
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = i === 1
+        ? `1x de ${fmt(val)} (à vista)`
+        : `${i}x de ${fmt(val)} sem juros`;
+      select.appendChild(opt);
+    }
+  }
+
+  function removeItemFromCart(index) {
+    if (index < 0 || index >= cart.length) return;
+    cart.splice(index, 1);
+    localStorage.setItem('sol_cart', JSON.stringify(cart));
+    renderResumo();
+    mostrarToast('Produto removido do resumo.');
+  }
+
+  function initResumoSwipe() {
+    document.querySelectorAll('.resumo-item-swipe').forEach((swipeItem) => {
+      const content = swipeItem.querySelector('.resumo-item');
+      if (!content) return;
+
+      let startX = 0;
+      let currentX = 0;
+      let dragging = false;
+
+      const setTranslate = (value) => {
+        content.style.transform = `translateX(${value}px)`;
+      };
+
+      const resetSwipe = () => {
+        content.classList.remove('arrastando');
+        setTranslate(0);
+      };
+
+      content.addEventListener('touchstart', (event) => {
+        if (window.innerWidth > 820) return;
+        startX = event.touches[0].clientX;
+        currentX = 0;
+        dragging = true;
+        content.classList.add('arrastando');
+      }, { passive: true });
+
+      content.addEventListener('touchmove', (event) => {
+        if (!dragging || window.innerWidth > 820) return;
+        const deltaX = event.touches[0].clientX - startX;
+        currentX = Math.min(0, deltaX);
+        setTranslate(Math.max(currentX, -120));
+      }, { passive: true });
+
+      content.addEventListener('touchend', () => {
+        if (!dragging || window.innerWidth > 820) return;
+        dragging = false;
+
+        if (currentX < -90) {
+          const index = Number(swipeItem.dataset.index);
+          removeItemFromCart(index);
+          return;
+        }
+
+        resetSwipe();
+      });
+
+      content.addEventListener('touchcancel', () => {
+        dragging = false;
+        resetSwipe();
+      });
+    });
+  }
+
+  function renderResumo() {
+    const container = document.getElementById('resumo-itens');
+
+    if (cart.length === 0) {
+      container.innerHTML = `<p style="font-style:italic;color:#9a9490;font-size:.9rem">Carrinho vazio.</p>`;
+      updateResumoTotais();
+      return;
+    }
+
+    container.innerHTML = cart.map((item, index) => `
+      <div class="resumo-item-swipe" data-index="${index}">
+        <button class="resumo-item-delete-bg" type="button" onclick="removeItemFromCart(${index})" aria-label="Excluir ${item.name}">
+          <span class="resumo-item-delete-icon">🗑</span>
+        </button>
+        <div class="resumo-item">
+          <img class="resumo-item-img" src="${item.img || ''}" alt="${item.name}"
+               onerror="this.style.display='none'"/>
+          <div class="resumo-item-info">
+            <div class="resumo-item-topo">
+              <div class="resumo-item-nome">${item.name}</div>
+              <button class="resumo-item-remove-btn" type="button" onclick="removeItemFromCart(${index})" aria-label="Remover ${item.name}">×</button>
+            </div>
+            <div class="resumo-item-qty">Qtd: ${item.qty}</div>
+          </div>
+          <div class="resumo-item-preco">${fmt(parsePreco(item.price) * item.qty)}</div>
+        </div>
+      </div>
+    `).join('');
+
+    updateResumoTotais();
+    initResumoSwipe();
+  }
+
+  function trocarMetodo(metodo, btn) {
+    document.querySelectorAll('.metodo-tab').forEach(t => t.classList.remove('ativo'));
+    document.querySelectorAll('.metodo-painel').forEach(p => p.classList.remove('ativo'));
+    btn.classList.add('ativo');
+    document.getElementById(`painel-${metodo}`).classList.add('ativo');
+  }
+
+  function mostrarToast(msg) {
+    const t = document.getElementById('pag-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function initWhatsappLink() {
+    const whatsappLink = document.getElementById('pagamento-whatsapp-link');
+    const phone = window.SOL_CONFIG?.WHATSAPP_PHONE || '5511999999999';
+
+    if (whatsappLink) {
+      whatsappLink.href = `https://wa.me/${phone}`;
+    }
+  }
+
+  function getCustomerData(metodo) {
+    if (metodo === 'credito') {
+      return {
+        name: document.getElementById('customer-name').value.trim(),
+        email: document.getElementById('customer-email').value.trim()
+      };
+    }
+
+    if (metodo === 'debito') {
+      return {
+        name: document.getElementById('debit-customer-name').value.trim(),
+        email: document.getElementById('debit-customer-email').value.trim()
+      };
+    }
+
+    return {
+      name: document.getElementById('pix-customer-name').value.trim(),
+      email: document.getElementById('pix-customer-email').value.trim()
+    };
+  }
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  async function registrarPedido(orderData) {
+    try {
+      const jwt = localStorage.getItem('sol_jwt');
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+
+      if (jwt) {
+        headers.Authorization = `Bearer ${jwt}`;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/orders`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(orderData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao registrar pedido');
+      }
+
+      return true;
+    } catch (_e) {
+      console.warn('Não foi possível registrar o pedido localmente no back-end.');
+      return false;
+    }
+  }
+
+  async function confirmarPagamento(metodo) {
+    if (cart.length === 0) {
+      mostrarToast('Seu carrinho está vazio.');
+      return;
+    }
+
+    const customer = getCustomerData(metodo);
+
+    if (!customer.name || !customer.email) {
+      mostrarToast('Preencha seu nome e e-mail para continuar.');
+      return;
+    }
+
+    if (!isValidEmail(customer.email)) {
+      mostrarToast('Informe um e-mail válido.');
+      return;
+    }
+
+    const { frete, total } = getResumoValores();
+    const buttonId = metodo === 'credito' ? 'btn-credito' : metodo === 'debito' ? 'btn-debito' : 'btn-pix';
+    const button = document.getElementById(buttonId);
+    const originalText = button.textContent;
+
+    button.disabled = true;
+    button.textContent = 'Redirecionando...';
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/payments/checkout-pro/preference`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          items: cart,
+          shipping: frete,
+          customer
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.initPoint) {
+        throw new Error(data.error || 'Falha ao iniciar checkout.');
+      }
+
+      setPendingOrder({
+        items: cart,
+        total: fmt(total),
+        paymentMethod: `mercado_pago_${metodo}`,
+        customerName: customer.name,
+        customerEmail: customer.email,
+        customerAddress: 'Não informado',
+        externalReference: data.externalReference || null,
+        createdAt: new Date().toISOString()
+      });
+
+      window.location.href = data.initPoint;
+    } catch (error) {
+      console.error(error);
+      mostrarToast('Não foi possível iniciar o checkout do Mercado Pago.');
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  }
+
+  async function tratarRetornoMercadoPago() {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('mp_status') || params.get('status');
+    const pendingOrder = getPendingOrder();
+
+    if (!status) {
+      return;
+    }
+
+    if (status === 'approved' || status === 'success') {
+      if (pendingOrder) {
+        await registrarPedido({
+          ...pendingOrder,
+          status: 'confirmado',
+          paymentStatus: 'approved'
+        });
+        clearPendingOrder();
+      }
+
+      localStorage.removeItem('sol_cart');
+      document.querySelectorAll('.metodo-painel').forEach(p => p.classList.remove('ativo'));
+      document.querySelectorAll('.metodo-tab').forEach(t => t.style.display = 'none');
+      document.querySelector('.pag-section-label').style.display = 'none';
+      document.getElementById('confirmacao-wrap').classList.add('visivel');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (status === 'pending') {
+      if (pendingOrder) {
+        await registrarPedido({
+          ...pendingOrder,
+          status: 'pendente',
+          paymentStatus: 'pending'
+        });
+        clearPendingOrder();
+      }
+
+      mostrarToast('Pagamento pendente. Aguarde a confirmação do Mercado Pago.');
+      return;
+    }
+
+    if (status === 'failure' || status === 'rejected') {
+      mostrarToast('Pagamento não aprovado. Tente novamente.');
+    }
+  }
+
+  initWhatsappLink();
+  renderResumo();
+  tratarRetornoMercadoPago();
+
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+</body>
+</html>
