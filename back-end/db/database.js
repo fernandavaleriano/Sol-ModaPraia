@@ -1,27 +1,51 @@
 const fs = require('fs');
 const path = require('path');
+const defaultProducts = require('./defaultProducts');
 
 const DB_FILE = path.join(__dirname, 'data.json');
 
+function buildDefaultProduct(product, index) {
+  return {
+    id: `${Date.now()}${index}`,
+    nome: product.nome,
+    preco: product.preco,
+    categoria: product.categoria,
+    descricao: product.descricao || '',
+    tamanhos: product.tamanhos || ['P', 'M', 'G', 'GG'],
+    fotos: product.fotos || [],
+    ativo: product.ativo !== false,
+    createdAt: new Date().toISOString()
+  };
+}
+
+function hydrateDefaultProducts() {
+  return defaultProducts.map((product, index) => buildDefaultProduct(product, index));
+}
+
 function loadData() {
   if (!fs.existsSync(DB_FILE)) {
-    const initial = { users: [], orders: [], products: [] };
+    const initial = { users: [], orders: [], products: hydrateDefaultProducts() };
     fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2));
     return initial;
   }
   const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'));
-  
+
   // Garante que todas as coleções existam
   let needsSave = false;
   if (!data.products) { data.products = []; needsSave = true; }
   if (!data.users) { data.users = []; needsSave = true; }
   if (!data.orders) { data.orders = []; needsSave = true; }
-  
+
+  if (Array.isArray(data.products) && data.products.length === 0 && defaultProducts.length > 0) {
+    data.products = hydrateDefaultProducts();
+    needsSave = true;
+  }
+
   // Salva se adicionou campos faltando
   if (needsSave) {
     saveData(data);
   }
-  
+
   return data;
 }
 
